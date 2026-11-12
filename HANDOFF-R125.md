@@ -364,3 +364,126 @@ POST /user/repos    PATCH /repos/{owner}/{repo}
 ```
 
 **全部走 `https://gh-proxy.com/https://api.github.com/...`**（`ghfast.top` 对 API 返回 403）。
+
+---
+
+## 13. 收尾：开源、署名、文案（2026-11-13 凌晨）
+
+### 13.1 三个仓库的最终地址
+
+| 仓库 | 可见性 | 地址 |
+|---|---|---|
+| **`veridical`** | **PUBLIC** | https://github.com/GuoTzu-yang/veridical |
+| **`veridical-survey`** | **PUBLIC** | https://github.com/GuoTzu-yang/veridical-survey |
+| `aidc2026` | private | 赛题交付，不公开 |
+
+**GitHub 账号 `login` 仍是 `GuoTzu-yang`**（API 改不了 `login`，只能网页改）。
+**账号显示名 `name` 已改为 `KuoTzuyang`**（`PATCH /user`）。
+
+### 13.2 署名三处已一致
+
+| 位置 | 内容 |
+|---|---|
+| PDF 首页 | `KuoTzuyang` / 塔里木大学 数据科学与大数据（NIIT）2026 级 4 班 / 2026-11-12 |
+| `veridical/README.md` | 同上 + 演进轮次 R1–R125 |
+| `veridical-survey/README.md` | 同上 |
+
+**git 的 `user.name` 已从 `GuoTzu-yang` 改为 `KuoTzuyang`**（三个本地仓库 + 全局）
+**但已有的 9 次提交里仍是 `GuoTzu-yang`** —— 改它们要重写历史，而 `ghfast.top` 不支持更新 ref
+**用户决定不管**（账号 handle 与真名不同是常态，不是矛盾）
+
+### 13.3 为被搜到做了什么
+
+**① topics（每库 11–12 个）**
+
+`veridical`：audit, chinese, factuality, guardrail, hallucination, latex, llm, mutation-testing, provenance, reproducibility, research-tooling, verification
+`veridical-survey`：audit, chinese, factuality, guardrail, hallucination, llm, metascience, mutation-testing, research-integrity, systematic-review, verification
+
+**② description 改成中英双语**
+
+```
+鉴真 / veridical — 一个会拒绝的系统：给 LLM 辅助科研用的验证护栏
+| A verification guardrail that refuses: number provenance, mutation-tested fences, 35 gates, fail-closed
+```
+
+**③ 两个 README 双向互链**（GitHub 把互链当作相关性信号）
+
+### 13.4 搜索实测（这是重点：现在基本搜不到）
+
+| 搜索词 | 总数 | 我们的位置 |
+|---|---|---|
+| `veridical-survey` | 1 | **第 1** |
+| `user:GuoTzu-yang` | 4 | **全部是我们** |
+| `veridical` | 85 | 被淹（前三是别人的 `veridical-flow` 等） |
+| `鉴真` | 256 | 不在前 100 |
+| `topic:guardrail` | 105 | **第 79 位** |
+| `topic:metascience` | 81 | **第 68 位** |
+| `topic:mutation-testing` | 1161 | 不在前 100 |
+| `topic:systematic-review` | 456 | 不在前 100 |
+
+**结论：现在只有两种方式能找到** —— 知道用户名，或者搜那个生僻的 `veridical-survey`
+**所以对外只能直发链接**
+
+### 13.5 抖音发布方案
+
+**文案（50 字，无句号）**
+
+```
+LLM 会编数字
+我给它写了会说「不」的护栏
+35 道门 只有 4 道被证明过
+它抓出别人前 先抓出自己
+代码开源 一起来补
+```
+
+**标签（8 个）**
+
+```
+#ai幻觉 #写论文 #科研 #开源 #程序员 #大模型 #可复现性 #研究生
+```
+
+**推荐链接放法**：正文写 `github 搜 veridical-survey`，**置顶评论放完整 URL**
+**理由**：抖音评论区会吞正文里的链接，正文写链接会限流
+
+### 13.6 一个被推翻的建议（记录下来，因为它暴露了我的思路）
+
+**我一开始建议**：投稿前把 `main.pdf` 从公开仓库撤下，只留 `main.tex`，以防被期刊认定「已发表」
+
+**用户否了，说「想想 Linux」**
+
+**他对我错在哪**：那是在两边下注 —— 既想拿走开源的好处，又想保留「还没人看过」的优势
+**而这篇论文批判的正是这种行为**：
+
+> 一个绿灯只在「指标的分母等于对象」时才有意义
+> 把「没被检验」当成「通过」，是最常见的骗法
+
+**建议撤 PDF，等于承认「这篇稿子的价值依赖于人们还没看到它」**
+
+**Linux 的做法**：我开放，然后让开放去筛选合作者
+- 代码、文档、成品全部公开
+- **遇到不允许预印本的期刊，不投那本**
+- 不为了期刊改变自己的开放策略
+
+**正确做法**：PDF 留着；投稿时选明确允许预印本的期刊；如果某本 Q2 不让，换一本
+
+### 13.7 一个诚实的判断：Q2 的门槛不在开源
+
+**这篇论文现在投 Q2，最可能的结果是「方法有趣，但证据不足」**
+
+| 短板 | 严重度 | 审稿人会说什么 |
+|---|---|---|
+| **零 baseline** | **最严重** | 「你的方法和现成工具比怎么样」 |
+| A/B 只有 n=1 | 严重 | 「4 分差在评分噪声内」 |
+| 31 门无检出证据 | 严重 | 「35 项里只有 4 项被证明过，其余算什么」 |
+| L4 未实现 | 中等 | 「四层结构里第四层是空的」 |
+
+**开源不会让这些变好，也不会变坏**
+**补齐 baseline（约 1 小时）比纠结开源重要一百倍**
+
+### 13.8 交接文档本身在哪
+
+| 位置 | 路径 |
+|---|---|
+| **仓库内** | `veridical-survey/HANDOFF-R125.md`（ASCII 名，因为中文路径在代理链路上编码会丢） |
+| 本地 | `veridical-survey/交接-R125.md` 与 `HANDOFF-R125.md` 两份同内容 |
+| 在线 | https://github.com/GuoTzu-yang/veridical-survey/blob/main/HANDOFF-R125.md |
