@@ -1,0 +1,26 @@
+# LaTeX 中间产物
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+# Python
+__pycache__/
+*.pyc
+# 未被正文引用的历史图（保留在本地，不入库）
+figs/ev_arch3layer.png
+figs/ev_t1_anatomy.png
+figs/ev_t5_gates33.png
+figs/ev_t13_seeded.png
+figs/ev_t10_ablation.png
+figs/fig1_balance.png
+figs/fig2_soc_train.png
+figs/fig3_bench.png
+figs/fig4_battery.png
+figs/fig5_eps.png
+figs/fig7_island.png
+figs/fig8_cap.png
